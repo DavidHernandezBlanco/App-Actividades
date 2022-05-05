@@ -26,6 +26,8 @@ header {
 
 body {
     margin: 0;
+    background-color: #607D8B;
+    color: #8EACBB;
 }
 
 strong {
@@ -36,10 +38,23 @@ i {
     opacity: 0.5;
 }
 
+.title {
+    background-color: #34515E;
+    border-radius: 10px;
+}
+
+.textbox {
+    height: 5vh;
+    width: 100%;
+    border-radius: 5px;
+    border-color: #34515E;
+    border-width: 0.25px;
+}
+
 
 /* Clear floats after the columns */
 
-.row-c:after {
+.row:after {
     content: "";
     display: table;
     clear: both;
@@ -96,11 +111,26 @@ i {
 
 /* Otras clases */
 
+form {
+    width: 100vw;
+}
+
+.form {
+    background-color: #8EACBB;
+    padding: 1%;
+    border-radius: 10px;
+    margin-top: 20vh;
+}
+
 .target {
     background-position: center;
     background-size: cover;
     border-radius: 5px;
     height: 25vw;
+}
+
+.navbar {
+    background-color: #34515E !important;
 }
 
 .target-s {
@@ -110,7 +140,7 @@ i {
     height: 15vw;
 }
 
-img{
+img {
     object-fit: cover;
     width: 100%;
 }
@@ -143,7 +173,9 @@ img{
     border-radius: 0;
 }
 
+
 /* Responsive: 800px */
+
 @media only screen and (max-width: 800px) {
     /*reglas*/
     header {
@@ -181,7 +213,6 @@ img{
     .padding-mobile {
         padding: 1% 2% 1% 2%;
     }
-
     .padding-right {
         padding-right: 2%;
     }
@@ -192,6 +223,7 @@ img{
         padding: 0;
     }
 }
+
 
 /* Responsive móbil: 400px*/
 
