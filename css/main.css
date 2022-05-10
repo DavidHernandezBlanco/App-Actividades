@@ -111,15 +111,16 @@ i {
 
 /* Otras clases */
 
-form {
-    width: 100vw;
-}
-
 .form {
+    color: black;
     background-color: #8EACBB;
     padding: 1%;
     border-radius: 10px;
     margin-top: 20vh;
+}
+
+.ffrom>form {
+    width: 100%;
 }
 
 .target {
@@ -173,6 +174,10 @@ img {
     border-radius: 0;
 }
 
+.h2 {
+    color: #34515E;
+}
+
 
 /* Responsive: 800px */
 
@@ -185,7 +190,7 @@ img {
         width: 100%;
     }
     .column-3 {
-        width: 50%;
+        width: 100%;
     }
     .column-4 {
         width: 50%;
@@ -222,6 +227,9 @@ img {
     .padding-l {
         padding: 0;
     }
+    .form {
+        margin-top: 5vh;
+    }
 }
 
 
@@ -242,5 +250,8 @@ img {
     }
     .padding-mobile {
         padding: 3% 0% 3% 0%;
+    }
+    .form {
+        margin-top: 5vh;
     }
 }

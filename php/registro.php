@@ -1,81 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Document</title>
-</head>
-<body>
+<?php
 
-    <?php
-        include '../php/conexion.php';
-
-        $nombre_user = $_POST['nombre_user'];
-        $correo_user = $_POST['correo_user'];
-        $contra_user = $_POST['contra_user'];
-
-        if ($_POST['contra_user'] != $_POST['contra_user2']) {
-            echo 'La contraseña de verificación no coincide.';
-         } else {
-            
-         }
-        $correo_encontrado=false;
-        $consulta= "SELECT correo_user FROM tbl_user";
-        $correo=mysqli_query($conexion,$consulta);
-        foreach ($correo as $key => $tabla) {
-        foreach ($tabla as $atributo => $email) {
-            if ($correo_user == $email){
-                 $correo_encontrado=true;
-                }
-            }
-        }
-        if (!$correo_encontrado){
-            $sql = "INSERT INTO `tbl_user` (`nombre_user`,`correo_user`, `contra_user`) VALUES ('$nombre_user','$correo_user','$contra_user')";
-            $insert = mysqli_query($conexion, $sql);
-            ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script>
-                function aviso(url) {
-                    Swal.fire({
-                    title: 'Usuario creado',
-                    icon: 'success',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Iniciar sesión'
-                    })
-                    .then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = url;
-                        }
-                        })
-                    }
-                aviso('../view/login.html');
-            </script>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <?php
-            }else {
-            ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script>
-                function aviso(url) {
-                    Swal.fire({
-                    title: 'Correo Existente',
-                    icon: 'warning',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Volver'
-                    })
-                    .then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = url;
-                            }
-                        })
-                    }
-                    aviso('../view/registro.php');
-            </script>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <?php                       
-            }
+if ((!empty($_POST['nombre_user']) && !empty($_POST['correo_user']) && !empty($_POST['contra_user']) && !empty($_POST['contra_user2'])) && ($_POST['contra_user'] == $_POST['contra_user2'])) {
     
-        ?>
+    $nombre_user = $_POST['nombre_user'];
+    $correo_user = $_POST['correo_user'];
+    $contra_user = $_POST['contra_user'];
 
-</body>
-</html>
+    require "../php/conexion.php";
+
+    if (!$conexion) {
+        echo "ERROR DE CONEXION";
+        echo "<a href='../view/register.php'>Volver</a>";
+        die;
+    }
+
+    $validation_query = "SELECT id_user FROM tbl_user WHERE correo_user = '$correo_user'";
+
+    $valid_login = mysqli_query($conexion, $validation_query);
+
+    $match = $valid_login -> num_rows;
+
+    if ($match === 1) {
+
+        echo "<script>window.location.href = '../view/registro.php?validation=false';</script>";
+        
+    } elseif ($match === 0) {
+
+        $insert_query = "INSERT INTO tbl_user (id_user, correo_user, contra_user, nombre_user) VALUES (NULL, '{$correo_user}', '{$contra_user}', '{$nombre_user}')";
+        $insert_sql = mysqli_query($conexion, $insert_query);
+
+        if ($insert_sql) {
+            require "./login.php";
+            login($email,$password);
+        } else {
+            echo "NO SE HA PODIDO CREAR EL USUARIO";
+        }
+
+    } else {
+        echo "<script>window.location.href = '../view/register.php?validation=false';</script>";
+    }
+
+} else {
+    echo "<script>window.location.href = '../view/register.php?validation=false';</script>";
+}

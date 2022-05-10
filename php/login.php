@@ -1,45 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Document</title>
-</head>
-<body>
-
-    <?php
-        include '../php/conexion.php';
-
-        $nombre_user = $_POST['nombre_user'];
-        $correo_user = $_POST['correo_user'];
-        $contra_user = $_POST['contra_user'];
-
-
-        if ($contra_user){
-            $sql = "INSERT INTO `tbl_user` (`nombre_user`,`correo_user`, `contra_user`) VALUES ('$nombre_user','$correo_user','$contra_user')";
-            $insert = mysqli_query($conexion, $sql);
-            ?>
-                        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script>
-                    function aviso(url) {
-                        Swal.fire({
-                                title: 'Has iniciado sesión',
-                                icon: 'success',
-                                confirmButtonColor: '#3085d6',
-                                confirmButtonText: 'Acceder'
-                            })
-                            .then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.href = url;
-                                }
-                            })
-                    }
-
-                    aviso('../view/nosotros.html');
-                </script>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <?php
+<?php
+    if (!empty($_POST['correo_user']) && !empty($_POST['contra_user'])) {
+        function login($correo_user, $contra_user) {
+            require "../php/conexion.php";
+            if (!$conexion) {
+                echo "ERROR DE CONEXION";
+                echo "<a href='../view/login.php'>Volver</a>";
+                die;
+            }
+            $query = "SELECT * FROM tbl_user WHERE correo_user = '{$correo_user}' AND contra_user = '{$contra_user}'";
+            $valid_login = mysqli_query($conexion, $query);
+            $match = $valid_login -> num_rows;
+            if ($match === 1) {
+                session_start();
+                foreach ($valid_login as $key => $user) {
+                    $_SESSION['id_user'] = $user['id_user'];
+                    $_SESSION['correo_user'] = $user['correo_user'];
+                    $_SESSION['contra_user'] = $user['contra_user'];
+                    $_SESSION['nombre_user'] = $user['nombre_user'];
+                }
+                echo "<script>window.location.href = '../view/nosotros.php';</script>";
+            } else {
+                echo "<script>window.location.href = '../view/login.php?validation=false';</script>";
+            }
         }
-    ?>
-</body>
-</html>
+        $email = $_POST['correo_user'];
+        $password = $_POST['contra_user'];
+        login($email,$password);
+    } else {
+        echo "<script>window.location.href = '../view/login.php?validation=false';</script>";
+    }

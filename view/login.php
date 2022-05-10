@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">#AppName</a>
+            <a class="navbar-brand" href="../index.html">ActiviGo</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,17 +42,33 @@
             </div>
         </div>
     </nav>
-    <h1>Inicia sesión:</h1>
-    <form action="../php/login.php" method="post">
-        <input type="text" name="nombre_user" placeholder="Usuario">
+    <div class="column-3">
         <br>
-        <input type="text" name="correo_user" placeholder="Email">
+    </div>
+    <?php
+        // if (isset($_GET['validation']) && ($_GET['validation']=="false")) {
+        //     echo "<h2 id='error'>Usuario o contraseña incorrecto</h2>";
+        // }else{
+        //    echo "<h2 id='NoError'>Por favor, ingresa tus datos</h2>";
+        // }
+        ?>
+    <div class="column-3 form">
+        <div><h2>Inicia sesión:</h2></div>
+        <div class="flex ffrom">
+            <form action="../php/login.php" method="post">
+                <input class="textbox" type="text" name="nombre_user" placeholder="Usuario">
+                <br>
+                <input class="textbox" type="text" name="correo_user" placeholder="Email">
+                <br>
+                <input class="textbox" type="password" name="contra_user" placeholder="Contraseña">
+                <br>
+                <br>
+                <input type="submit" value="Acceder">
+            </form>
+        </div> 
         <br>
-        <input type="password" name="contra_user" placeholder="Contraseña">
-        <br>
-        <input type="submit" value="Acceder">
-    </form>
-    <h1>No tienes cuenta? <a href="../view/registro.php">Registrate!</a></h1>
+        <div><h6>No tienes cuenta? <a href="../view/registro.php">Registrate!</a></h6></div>
+    </div>
 </body>
 
 </html>

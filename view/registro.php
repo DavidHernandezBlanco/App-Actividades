@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">#AppName</a>
+            <a class="navbar-brand" href="../index.html">ActiviGo</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -45,24 +45,35 @@
 
     <div class="column-3">
         <br>
-        <h1>Registrate: </h1>
     </div>
-    <div class="form flex column-3">
-        
-        <form action="../php/registro.php" method="post">
-            <input class="textbox" type="text" name="nombre_user" placeholder="Usuario">
-            <br>
-            <input class="textbox" type="text" name="correo_user" placeholder="Email">
-            <br>
-            <input class="textbox" type="password" name="contra_user" placeholder="Contraseña">
-            <br>
-            <input class="textbox" type="password" name="contra_user2" placeholder="Repite contraseña">
-            <br>
-            <br>
-            <input type="submit" value="Acceder">
-        </form>
-    </div>
+    <div class="column-3 form">
+        <div><h2>Registrate</h2></div>
+        <div class="flex ffrom">
+            <form action="../php/registro.php" method="post">
+                <input class="textbox" type="text" name="nombre_user" placeholder="Usuario">
+                <br>
+                <input class="textbox" type="text" name="correo_user" placeholder="Email">
+                <br>
+                <input class="textbox" type="password" name="contra_user" placeholder="Contraseña">
+                <br>
+                <input class="textbox" type="password" name="contra_user2" placeholder="Repite contraseña">
+                <br>
+                <br>
+                <input type="submit" value="Acceder">
+            </form>
+        </div> 
+        <br>
+        <div><h6>Ya tienes una cuenta? <a href="../view/login.php">Inicia Sessión!</a></h6></div>
 
+    </div>
+    <?php
+        if (isset($_GET['msg'])) {
+            $msg=$_GET['msg'];
+            if ($msg==1) {
+                echo "<span>Las contraseñas no coinciden</span>";
+            }
+        }
+    ?>
 </body>
 
 </html>
