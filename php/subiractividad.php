@@ -1,34 +1,40 @@
 <?php
 session_start();
-$usuario = $_SESSION['nombre_user']; 
-echo "<div class='row-c'>";
-    echo "<div class='column-1 padding-m'>";
-        echo "<h4 class='padding-m'>Actividades de $usuario</h4>";
-    echo "</div>";
 
-$conexion = mysqli_connect('localhost', 'root', '', 'db_app_activ');
-$cons = "SELECT id_user FROM tbl_user WHERE nombre_user = '$usuario';";
-$id_usu= mysqli_query($conexion, $cons);
-$row = mysqli_fetch_array($id_usu);
+if (!empty($_SESSION['correo_user'])) {
+    if (!empty($_POST['nombre_activ']) && !empty($_FILES['foto_user'])) {
+        
+        $nombre_activ = $_POST['nombre_activ'];
+        $desc_activ = $_POST['desc_activ'];
+        $lugar_activ = $_POST['lugar_activ'];
+        $foto_user = $_FILES['foto_user'];
 
-$id_user = $row[0]; 
+        require "../php/conexion.php";
 
-$connection = mysqli_connect('localhost', 'root', '', 'db_app_activ');
-$sql = "SELECT * FROM tbl_activ WHERE nombre_user = $id_user;";
-$listado_mis_act = mysqli_query($conexion, $sql);
+        $last_insert_query = "SELECT MAX(id) FROM tbl_activ;";
+        $last_insert_request = mysqli_query($conexion, $last_insert_query);
+        $last_insert_array = mysqli_fetch_array($last_insert_request);
 
-$numero_filas = mysqli_num_rows($listado_mis_act);
-$ruta = $_SERVER['SERVER_NAME']."/www/App_Actividades/img/";
-    foreach ($listado_mis_act as $mis_actividades) {
-    $rutacompleta = "http://".$ruta.$mis_actividades['foto_user'];
+        $path = "/www/App-Actividades/img/actividades/";
+        $tipo = explode('/',$foto_user['type']);
+        $destinoLocal = $_SERVER['DOCUMENT_ROOT'].$path.$nombre_foto;
+        $destinoRed = "http://".$_SERVER['SERVER_NAME'].$path.$nombre_foto;
 
-    echo "<div class='column-3 padding-mobile'>";
-        echo "<a href='./actividad.php'><img src='{$rutacompleta}' class='target'></a>";
+        if (($foto_user['size'] < 1000*1024) && ($foto_user['type'] == 'image/png' || $foto_user['type'] == 'image/jpeg' || $foto_user['type'] == 'image/gif')) {
+            $exito = move_uploaded_file($foto_user['tmp_name'], $destinoLocal);
+            
+            if ($exito) {
+                
+                $act_insert_query = "INSERT INTO tbl_activ (nombre_activ, desc_activ, foto_user, lugar_activ) VALUES ('$nombre_activ', '$desc_activ', '$lugar_activ', '$foto_user', '$nombre_user');";
+                $act_insert_request = mysqli_query($conexion, $act_insert_query);
 
-        echo "<div style='float: right;' class='padding-m'>";
-        echo "<button class='btn btn-light m-1' type='submit'><i class='fa-solid fa-link'></i></button>";
-        echo "<a href='./actividad_like.php'><button class='btn btn-light m-1' type='submit'><i class='fa-solid fa-heart'></i></button></a>";
-        echo "</div>";
-    echo "</div>";
+            } else {
+                echo "<script>window.location.href = '../view/subir.actividades.php?val=\"img_error\"';</script>";
+            }
+        } else {
+        echo "<script>window.location.href = '../view/subir.actividades.php?val=\"field_error\"';</script>";
+        }
+    }
+} else {
+    echo "<script>window.location.href = '../view/login.php';</script>";
 }
-?>
