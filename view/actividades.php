@@ -17,6 +17,10 @@
 </head>
 
 <body>
+<?php
+    session_start();
+    if (!isset($_SESSION['correo_user'])) {
+    ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">ActiviGo</a>
@@ -30,13 +34,12 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active disabled" aria-current="page" href="./actividades.html">Actividades</a>
+                        <a class="nav-link active disabled" aria-current="page" href="./actividades.php">Actividades</a>
                     </li>
                 </ul>
                 <form class="d-flex">
                     <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-                    <button class="btn btn-light form-control me-1" type="submit"><i
-                            class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                    <button class="btn btn-light form-control me-1" type="submit"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
                     <button class="btn btn-light form-control ms-1" type="submit">Acceder</button>
                 </form>
             </div>
@@ -123,6 +126,114 @@
             </div>
         </div>
     </div>
+    <?php } else {?>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">ActiviGo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 50vh;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./nosotros.php">Sobre nosotros</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active disabled" aria-current="page" href="./actividades.php">Actividades</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+                    <button class="btn btn-light form-control me-1" type="submit"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                    <!-- <button class="btn btn-light form-control ms-1" type="button" onclick="window.location.href = '../view/login.php'">Acceder</button> -->
+                    <button class="btn btn-light form-control ms-1" type="button" onclick="window.location.href = '../php/logout.php'">LogOut</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Top -->
+    <div class="row-c padding-m">
+        <h4 class="column-1 padding-m">Top 5</h4>
+
+        <div class="column-1 padding-s">
+            <div class="column-5 padding-s">
+                <img src="../img/keila-hotzel-lFmuWU0tv4M-unsplash.jpg" alt="" class="target-s">
+            </div>
+            <div class="column-5 padding-s">
+                <img src="../img/susanna-marsiglia-Yjr6EafseQ8-unsplash.jpg" alt="" class="target-s">
+            </div>
+            <div class="column-5 padding-s">
+                <img src="../img/dan-cristian-padure-QQkQcaz7qmY-unsplash.jpg" alt="" class="target-s">
+            </div>
+            <div class="column-5 padding-s">
+                <img src="../img/nick-fewings-EkyuhD7uwSM-unsplash.jpg" alt="" class="target-s">
+            </div>
+            <div class="column-5 padding-s">
+                <img src="../img/etienne-girardet-j2Soo4TfFMk-unsplash.jpg" alt="" class="target-s">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- listado de actividades -->
+    <div class="row-c">
+        <div class="column-1 padding-m">
+            <h4 class="padding-m">Explora</h4>
+        </div>
+
+        <div class="column-3 padding-mobile">
+            <img src="../img/eva-gour-94mm2Txn12s-unsplash.jpg" alt="" class="target">
+            <div style="float: right;" class="padding-m">
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-link"></i></button>
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-heart"></i></button>
+            </div>
+        </div>
+        <div class="column-3 padding-mobile">
+            <img src="../img/dan-cristian-padure-QQkQcaz7qmY-unsplash.jpg" alt="" class="target">
+            <div style="float: right;" class="padding-m">
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-link"></i></button>
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-heart"></i></button>
+            </div>
+        </div>
+        <div class="column-3 padding-mobile">
+            <img src="../img/etienne-girardet-j2Soo4TfFMk-unsplash.jpg" alt="" class="target">
+            <div style="float: right;" class="padding-m">
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-link"></i></button>
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-heart"></i></button>
+            </div>
+        </div>
+        <div class="column-3 padding-mobile">
+            <img src="../img/lucas-hoang-mwfBszKf5Xw-unsplash.jpg" alt="" class="target">
+            <div style="float: right;" class="padding-m">
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-link"></i></button>
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-heart"></i></button>
+            </div>
+        </div>
+        <div class="column-3 padding-mobile">
+            <img src="../img/mathilde-langevin-tbzSgZbEuz4-unsplash.jpg" alt="" class="target">
+            <div style="float: right;" class="padding-m">
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-link"></i></button>
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-heart"></i></button>
+            </div>
+        </div>
+        <div class="column-3 padding-mobile">
+            <img src="../img/nick-fewings-EkyuhD7uwSM-unsplash.jpg" alt="" class="target">
+            <div style="float: right;" class="padding-m">
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-link"></i></button>
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-heart"></i></button>
+            </div>
+        </div>
+        <div class="column-3 padding-mobile">
+            <img src="../img/susanna-marsiglia-Yjr6EafseQ8-unsplash.jpg" alt="" class="target">
+            <div style="float: right;" class="padding-m">
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-link"></i></button>
+                <button class="btn btn-light m-1" type="submit"><i class="fa-solid fa-heart"></i></button>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
 </body>
 
 </html>

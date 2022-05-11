@@ -26,17 +26,16 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 50vh;">
                     <li class="nav-item">
-                        <a class="nav-link" href="./nosotros.html">Sobre nosotros</a>
+                        <a class="nav-link" href="./nosotros.php">Sobre nosotros</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active disabled" aria-current="page" href="./actividades.html">Actividades</a>
+                        <a class="nav-link active disabled" aria-current="page" href="./actividades.php">Actividades</a>
                     </li>
                 </ul>
                 <form class="d-flex">
                     <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-                    <button class="btn btn-light form-control me-1" type="submit"><i
-                            class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                    <button class="btn btn-light form-control me-1" type="submit"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
                     <button class="btn btn-light form-control ms-1" type="submit">Acceder</button>
                 </form>
             </div>
